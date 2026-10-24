@@ -136,9 +136,9 @@ stability:
 
 ## Troubleshooting
 
-**No hand detected**: Ensure good lighting, keep hand clearly visible
+**No hand detected**: Ensure good lighting and keep hand clearly visible
 
-**Not transitioning from hover to control**: with hand open, flip to back and front again (or vice versa)
+**Not transitioning from hover to control**: Flip open hand to back and front again (or vice versa)
 
 **Camera won't open**: Check permissions, verify webcam isn't in use elsewhere
 
