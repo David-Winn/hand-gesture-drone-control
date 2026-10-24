@@ -52,7 +52,7 @@ python main.py
 ### With ESP-CAM and Drone
 
 ```bash
-python main.py --camera esp --drone-ip udp://192.168.43.42
+python main.py --camera esp --drone-ip udp://192.168.4.1
 ```
 
 ### Disable Settings UI
