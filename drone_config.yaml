@@ -1,0 +1,100 @@
+# Drone Configuration File
+# Manually adjust these values to tune motor power and stability
+
+# =============================================================================
+# MOTOR POWER LIMITS
+# =============================================================================
+motor:
+  # Crazyflie drone (via cflib) - thrust range is 0-65535
+  crazyflie:
+    min_thrust: 10001       # Minimum thrust value (motors barely spinning)
+    max_thrust: 60000       # Maximum thrust value (full power)
+    hover_thrust: 35000     # Approximate thrust for hovering
+
+  # ESP-Drone (via UDP) - thrust range is 0-65535
+  esp_drone:
+    min_thrust: 30000       # Minimum thrust for flight
+    max_thrust: 65535       # Maximum thrust value
+    hover_thrust: 45000     # Approximate thrust for hovering
+
+  # Throttle input mapping [-1.0 to 1.0]
+  throttle:
+    min_input: -1.0         # Minimum throttle input (descend)
+    max_input: 1.0          # Maximum throttle input (ascend)
+    deadband: 0.05          # Ignore throttle inputs smaller than this
+
+# =============================================================================
+# STABILITY TUNING
+# =============================================================================
+stability:
+  # Exponential Moving Average (EMA) smoothing
+  # Lower values = smoother but slower response
+  # Higher values = faster response but more jitter
+  ema_alpha: 1.0            # Range: 0.1 (very smooth) to 1.0 (no smoothing)
+
+  # Deadzone - ignores small movements to prevent drift
+  deadzone: 0.05            # Range: 0.0 to 0.2
+
+  # Rate limiting - prevents sudden jerky movements
+  rate_limits:
+    max_roll_rate: 100.0        # Max degrees/second for roll changes
+    max_pitch_rate: 100.0       # Max degrees/second for pitch changes
+    max_yaw_rate: 100.0         # Max degrees/second for yaw changes
+    max_throttle_rate: 2.0      # Max throttle change per second
+
+  # PID-style gains (for future PID implementation)
+  # Currently unused - system uses EMA smoothing instead
+  pid:
+    roll:
+      p: 1.0                # Proportional gain
+      i: 0.0                # Integral gain
+      d: 0.0                # Derivative gain
+    pitch:
+      p: 1.0
+      i: 0.0
+      d: 0.0
+    yaw:
+      p: 1.0
+      i: 0.0
+      d: 0.0
+    altitude:
+      p: 1.0
+      i: 0.0
+      d: 0.0
+
+# =============================================================================
+# CONTROL SENSITIVITY
+# =============================================================================
+control:
+  # How much hand movement translates to drone movement
+  # Higher values = more aggressive response
+  roll_scale: 45.0          # Max roll angle in degrees
+  pitch_scale: 45.0         # Max pitch angle in degrees
+  throttle_scale: 1.5       # Throttle sensitivity (front view)
+  throttle_z_scale: 0.6     # Throttle sensitivity (top-down view)
+  yaw_scale: 30.0           # Max yaw rate in degrees/second
+
+  # Command rate
+  command_rate_hz: 20       # Control loop frequency in Hz
+
+  # Safety timeout
+  dead_frame_limit: 10      # Frames without hand detection before auto-landing
+
+# =============================================================================
+# GESTURE RECOGNITION
+# =============================================================================
+gesture:
+  # MediaPipe detection confidence thresholds
+  min_detection_confidence: 0.7   # Minimum confidence to detect a hand
+  min_tracking_confidence: 0.5    # Minimum confidence to track a hand
+
+  # Hand pose thresholds (for open/fist detection)
+  wrist_spread_open: 0.35         # Threshold for open hand detection
+  wrist_spread_fist: 0.20         # Threshold for fist detection
+
+# =============================================================================
+# NETWORK
+# =============================================================================
+network:
+  esp_cam_url: "http://192.168.4.1:81/stream"
+  esp_drone_udp: "udp://192.168.43.42"

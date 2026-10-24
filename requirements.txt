@@ -1,0 +1,6 @@
+opencv-python
+mediapipe
+numpy
+matplotlib
+pyyaml
+# cflib — only needed for live mode, install separately: pip install cflib
