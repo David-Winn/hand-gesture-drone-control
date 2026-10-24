@@ -1,6 +1,6 @@
 # Gesture Drone
 
-Control a drone with hand gestures using MediaPipe for real-time hand tracking.
+Control a drone with hand gestures using MediaPipe for hand tracking.
 
 ## How It Works
 
